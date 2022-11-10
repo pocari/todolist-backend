@@ -1,0 +1,9 @@
+# frozen_string_literal: true
+
+create_table 'todo_items', charset: 'utf8mb4', collation: 'utf8mb4_bin', force: :cascade do |t|
+  t.string :text, null: false, comment: '内容'
+  t.string :completed, null: false, default: false, comment: '完了フラグ'
+
+  t.timestamps null: false
+end
+

@@ -11,4 +11,11 @@
 # It's strongly recommended that you check this file into your version control system.
 
 ActiveRecord::Schema[7.0].define(version: 0) do
+  create_table "todo_items", charset: "utf8mb4", collation: "utf8mb4_bin", force: :cascade do |t|
+    t.string "text", null: false, comment: "内容"
+    t.string "completed", default: "0", null: false, comment: "完了フラグ"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
 end
