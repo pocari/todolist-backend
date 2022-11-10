@@ -6,4 +6,3 @@ create_table 'todo_items', charset: 'utf8mb4', collation: 'utf8mb4_bin', force: 
 
   t.timestamps null: false
 end
-
