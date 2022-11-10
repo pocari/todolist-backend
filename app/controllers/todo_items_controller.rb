@@ -1,5 +1,7 @@
+# frozen_string_literal: true
+
 class TodoItemsController < ApplicationController
-  before_action :set_todo_item, only: %i[ show update destroy ]
+  before_action :set_todo_item, only: %i[show update destroy]
 
   # GET /todo_items
   def index
@@ -39,16 +41,17 @@ class TodoItemsController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_todo_item
-      @todo_item = TodoItem.find(params[:id])
-    end
 
-    # Only allow a list of trusted parameters through.
-    def todo_item_params
-      params.require(:todo_item).permit(
-        :text,
-        :completed,
-      )
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_todo_item
+    @todo_item = TodoItem.find(params[:id])
+  end
+
+  # Only allow a list of trusted parameters through.
+  def todo_item_params
+    params.require(:todo_item).permit(
+      :text,
+      :completed
+    )
+  end
 end
