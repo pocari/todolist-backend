@@ -1,0 +1,49 @@
+version: '3.7'
+
+x-rails-environment: &rails-environment
+  EDITOR: vim
+  RAILS_LOG_TO_STDOUT: "true"
+  DATABASE_HOST: mysql
+  LOCAL_DOCKER_COMPOSE_MODE: 1
+  MANUAL: ${MANUAL:-0}
+
+x-base_rails: &base_rails
+  build:
+    context: .
+    dockerfile: ./containers/local/rails/Dockerfile
+  tmpfs:
+    - /usr/src/app/tmp/pids
+
+services:
+  mysql:
+    build:
+      context: .
+      dockerfile: ./containers/local/mysql/Dockerfile
+    command: mysqld --character-set-server=utf8mb4 --collation-server=utf8mb4_general_ci --ft_min_word_len=1
+    environment:
+      MYSQL_ALLOW_EMPTY_PASSWORD: "yes"
+    ports:
+      - '33306:3306'
+    volumes:
+      - mysql-volume:/var/lib/mysql
+    # consoleに"mbind: Operation not permitted"が出て続けるのでその回避策
+    cap_add:
+      - SYS_NICE # 追加
+  rails:
+    <<: *base_rails
+    environment:
+      <<: *rails-environment
+    command:
+      - ./bin/dc_wrapper.sh
+    ports:
+      - "33000:3000"
+    depends_on:
+      - mysql
+    volumes:
+      - .:/usr/src/app
+      - rails-tmp:/usr/src/app/tmp
+      - bundle-volume:/usr/local/bundle
+volumes:
+  rails-tmp:
+  mysql-volume:
+  bundle-volume:
