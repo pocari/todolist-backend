@@ -11,4 +11,6 @@
 #  updated_at            :datetime         not null
 #
 class TodoItem < ApplicationRecord
+  validates :text, presence: true,
+                   length: { maximum: MAX_STRING_LENGTH }
 end
