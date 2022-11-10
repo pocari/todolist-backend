@@ -1,0 +1,77 @@
+require:
+  - rubocop-rails
+  - rubocop-performance
+  - rubocop-rspec
+
+AllCops:
+  TargetRubyVersion: 3.1
+  DisplayStyleGuide: true
+  StyleGuideBaseURL: https://github.com/fortissimo1997/ruby-style-guide/blob/japanese/README.ja.md
+  NewCops: enable
+  Include:
+    - "**/*.rb"
+    - "**/*.rake"
+    - db/schema/**/*.schema
+  Exclude:
+    - "node_modules/**/*"
+    - "vendor/**/*"
+    - "tmp/**/*"
+    - "db/schema.rb"
+    - "bin/**/*"
+    - ".pryrc"
+    - "frontend/**/*"
+    - "containers/**/*"
+
+Metrics/BlockLength:
+  Exclude:
+    - "config/environments/**/*.rb"
+    - "config/routes.rb"
+    - spec/**/*.rb
+    - db/migrate/**/*.rb
+    - db/schema/**/*.schema
+    - lib/tasks/**/*.rake
+Metrics/AbcSize:
+  Max: 30
+Layout/LineLength:
+  Max: 120
+  Exclude:
+    - "config/initializers/*"
+    - "db/migrate/*"
+    - "db/fixtures/*"
+    - "spec/**/*.rb"
+  AllowedPatterns: ['\A#  index_', '\A#  idx_']
+Metrics/MethodLength:
+  Max: 30
+  Exclude:
+    - db/migrate/**/*.rb
+    - db/schema/**/*.schema
+Style/SymbolProc:
+  Exclude:
+    - db/migrate/*.rb
+    - app/blueprints/**/*.rb
+Style/Documentation:
+  Enabled: false
+Style/AsciiComments:
+  Enabled: false
+Style/ClassAndModuleChildren:
+  Enabled: false
+Style/NumberedParameters:
+  Enabled: false
+Naming/MethodParameterName:
+  Enabled: false
+Naming/InclusiveLanguage:
+  Enabled: false
+RSpec/MultipleMemoizedHelpers:
+  Max: 20
+RSpec/ContextWording:
+  Enabled: false
+RSpec/ExampleLength:
+  Max: 100
+RSpec/MultipleExpectations:
+  Enabled: false
+Rails/UnknownEnv:
+  Environments:
+    - development
+    - test
+    - stg
+    - prd
