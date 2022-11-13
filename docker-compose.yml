@@ -6,6 +6,7 @@ x-rails-environment: &rails-environment
   DATABASE_HOST: mysql
   LOCAL_DOCKER_COMPOSE_MODE: 1
   MANUAL: ${MANUAL:-0}
+  CORS_ALLOW_ORIGIN: '*'
 
 x-base_rails: &base_rails
   build:
